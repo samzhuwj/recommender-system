@@ -3,9 +3,10 @@ import numpy as np
 
 def cofi_cost_function(params, Y, R, num_users, num_movies, num_features, lmd):
     """
+    implement the cost function for collaborative filtering
     """    
-    X = params[0:num_movies * num_features].reshape((num_movies, num_features))
-    theta = params[num_movies * num_features:].reshape((num_users, num_features))
+    X = params[0:num_movies*num_features].reshape((num_movies, num_features))
+    theta = params[num_movies*num_features:].reshape((num_users, num_features))
 
     # You need to set the following values correctly.
     cost = 0
@@ -33,13 +34,10 @@ def cofi_cost_function(params, Y, R, num_users, num_movies, num_features, lmd):
     #                 partial derivatives w.r.t. to each element of X
     #        theta_grad - num_users x num_features matrix, containing the
     #                     partial derivatives w.r.t. to each element of theta
-
-    hypothesis = (np.dot(X, theta.T) - Y) * R
-
-    cost = (1/2)*np.sum(hypothesis**2) + (lmd/2)*np.sum(theta**2) + (lmd/2)*np.sum(X**2)
-
-    X_grad = np.dot(hypothesis, theta) + lmd * X
-    theta_grad = np.dot(hypothesis.T, X) + lmd * theta
+    hypothesis = (np.dot(X, theta.T)-Y)*R
+    cost = (1/2)*np.sum(hypothesis**2)+(lmd/2)*np.sum(theta**2)+(lmd/2)*np.sum(X**2)
+    X_grad = np.dot(hypothesis, theta)+lmd*X
+    theta_grad = np.dot(hypothesis.T, X)+lmd*theta
 
     # ==========================================================
 

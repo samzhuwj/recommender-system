@@ -1,5 +1,6 @@
 def load_movie_list():
     """
+    load the list of movies into a list
     """    
     movie_list = []
     with open('movie_ids.txt') as f:
